@@ -19,6 +19,6 @@ async function fetchData() {
 	
 }
 
-fetchData()
+fetchData();
 
 export default fetchData;

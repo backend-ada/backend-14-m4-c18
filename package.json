@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "ts-node ./src/index.ts",
+		"dev": "ts-node ./src/countries.ts",
 		"build": "tsc",
 		"test": "jest test.js",
 		"build:test": "tsc && npm test"

@@ -9,14 +9,23 @@ interface Country {
     population: number;
 }
 
-function getAveragePopulation(): number {
-    // Completar esta función.
+function getAveragePopulation(countries:Country[]): number {
+    const sumOfpopulations =  countries.reduce((accumulator:number, country:Country)=>accumulator+country.population,0)
+    const avgPopulation=Math.ceil(sumOfpopulations/countries.length)
+    return avgPopulation
 
-    return 0;
 }
 
 async function fetchData() {
-	
+	const response = await fetch(API_BASE_URL)
+    const countryData = await response.json()
+    const country = await countryData.map((data:any)=>{
+        return {
+            name:data.name,
+            population:data.population
+        }
+    })
+    return getAveragePopulation(await country)
 }
 
 fetchData();

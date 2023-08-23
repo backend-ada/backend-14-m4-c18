@@ -33,6 +33,6 @@ async function fetchData() {
 
 }
 
-const pais = fetchData();
-console.log(pais)
+const promPopulation = fetchData();
+console.log(promPopulation)
 export default fetchData

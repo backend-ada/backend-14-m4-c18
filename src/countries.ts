@@ -1,4 +1,4 @@
-const API_BASE_URL = `https://restcountries.com/v3.1/region/europe`;
+const API_BASE_URL = new URL(`https://restcountries.com/v3.1/region/europe`);
 
 interface Country {
     name: {
@@ -9,16 +9,30 @@ interface Country {
     population: number;
 }
 
-function getAveragePopulation(): number {
-    // Completar esta función.
-
-    return 0;
+function getAveragePopulation(countries: Country[]) {
+    const totalPopulation = countries.reduce((acc, country) => acc + country.population, 0);
+    const averagePopulation = Math.round(totalPopulation / countries.length)
+    return averagePopulation;
 }
 
 async function fetchData() {
-	
+
+    const response = await fetch(API_BASE_URL);
+    const data = await response.json();
+    const result = getAveragePopulation(data);
+       
+    return result;
+
+
+    // fetch(API_BASE_URL)
+    //     .then((response) => response.json())
+    //     .then(data => console.log(getAveragePopulation(data)))
+
+    //.catch(error => console.log(error))
+
+
 }
 
-fetchData();
-
-export default fetchData;
+const promPopulation = fetchData();
+console.log(promPopulation)
+export default fetchData

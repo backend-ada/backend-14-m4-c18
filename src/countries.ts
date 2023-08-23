@@ -1,24 +1,32 @@
-const API_BASE_URL = `https://restcountries.com/v3.1/region/europe`;
+const API_BASE_URL = `https://restcountries.com/v3.1/region/europe`
 
 interface Country {
-    name: {
-        common: string;
-        official: string,
-        nativeName: Object
-    },
-    population: number;
+  name: {
+    common: string
+    official: string
+    nativeName: Object
+  }
+  population: number
 }
 
-function getAveragePopulation(): number {
-    // Completar esta función.
+const getAveragePopulation = (countries: Country[]): number => {
+  const countriesPopulation = countries.map((country) => country.population)
 
-    return 0;
+  const totalPopulation = countriesPopulation.reduce(
+    (acc, current) => (acc += current)
+  )
+  const avergePopulation = Math.round(totalPopulation / countries.length)
+  return avergePopulation
 }
 
-async function fetchData() {
-	
+const fetchData = async () => {
+  const response = await fetch(API_BASE_URL)
+  const data = await response.json()
+  const avergePopulationResult = getAveragePopulation(data)
+
+  return avergePopulationResult
 }
 
-fetchData();
+fetchData()
 
-export default fetchData;
+export default fetchData
